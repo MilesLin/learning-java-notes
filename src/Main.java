@@ -22,6 +22,8 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.function.*;
+import java.util.logging.*;
+import java.util.logging.Formatter;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 //import java.nio.file.Files;
@@ -31,23 +33,23 @@ import java.nio.file.*;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
 
+    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
+    static {
+        try {
+            FileHandler fh = new FileHandler(Main.class.getSimpleName()+".log");
+            fh.setFormatter(new SimpleFormatter());
+            fh.setFilter(x -> x.getLevel() == Level.SEVERE);
+            LOGGER.addHandler(fh);
+//            LOGGER.addHandler(new ConsoleHandler());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public static void main(String[] args){
+        LOGGER.log(Level.INFO, "hahaha-give me that 123");
+        LOGGER.log(Level.SEVERE, "hahaha-give me that 789");
 
-        HashMap<String, Integer> map = new HashMap<>(Map.of("1",1, "2",2));
-        HashMap<String, Integer> map2 = new HashMap<>(Map.of("2",2,"1",1));
-
-
-
-        var a = Path.of("a");
-//        map.entrySet().removeIf(x -> x.getValue() > 1);
-//        map.put("222", 123);
-        System.out.println(map.equals(map2));
-//        HashMap<String, Integer> newMap = new HashMap<>();
-//        map.values().stream().filter(
-//                x -> {
-//                   return Collections.frequency(map.values(), x) > 1;
-//                }
-//        ).toList();
+        LOGGER.log(Level.INFO, "hahaha-give me that 123");
     }
     public record Emp(int id, String name){}
 }
