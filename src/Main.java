@@ -46,11 +46,31 @@ public class Main {
         }
     }
     public static void main(String[] args){
+        var d = new Db();
+        var cloned =  d.clone();
         LOGGER.log(Level.INFO, "hahaha-give me that 123");
         LOGGER.log(Level.SEVERE, "hahaha-give me that 789");
 
         LOGGER.log(Level.INFO, "hahaha-give me that 123");
     }
     public record Emp(int id, String name){}
+}
+
+public class Db implements Cloneable {
+    @Override
+    public Db clone() {
+        try {
+            return (Db) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+
+    private static class LazyHolder {
+        static final Db INSTANCE = new Db();
+    }
+    public static Db getInstance(){
+        return LazyHolder.INSTANCE;
+    }
 }
 
