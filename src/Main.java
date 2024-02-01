@@ -1,6 +1,7 @@
 //import static comabc.dasdf.*;
 
 import comabc.*;
+import jdk.jfr.FlightRecorder;
 
 import javax.swing.text.html.Option;
 import java.awt.*;
@@ -29,48 +30,20 @@ import java.util.stream.Stream;
 //import java.nio.file.Files;
 import java.nio.file.*;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
 
     private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
-    static {
-        try {
-            FileHandler fh = new FileHandler(Main.class.getSimpleName()+".log");
-            fh.setFormatter(new SimpleFormatter());
-            fh.setFilter(x -> x.getLevel() == Level.SEVERE);
-            LOGGER.addHandler(fh);
-//            LOGGER.addHandler(new ConsoleHandler());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    public static void main(String[] args){
-        var d = new Db();
-        var cloned =  d.clone();
-        LOGGER.log(Level.INFO, "hahaha-give me that 123");
-        LOGGER.log(Level.SEVERE, "hahaha-give me that 789");
 
-        LOGGER.log(Level.INFO, "hahaha-give me that 123");
+
+
+    public static void main(String[] args){
+        var n = 1_000_000.000_0001;
+        System.out.println(1_000_000);
     }
+
+    public static String getSomething(){return"aa";}
+
     public record Emp(int id, String name){}
 }
 
-public class Db implements Cloneable {
-    @Override
-    public Db clone() {
-        try {
-            return (Db) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
-    }
-
-    private static class LazyHolder {
-        static final Db INSTANCE = new Db();
-    }
-    public static Db getInstance(){
-        return LazyHolder.INSTANCE;
-    }
-}
 
