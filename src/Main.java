@@ -37,8 +37,9 @@ public class Main {
 
 
     public static void main(String[] args){
-        var n = 1_000_000.000_0001;
-        System.out.println(1_000_000);
+        var list = List.of("1","2");
+        list.stream().filter(x -> x.equals("2"))
+                .map(x -> x + "z").forEach(System.out::println);
     }
 
     public static String getSomething(){return"aa";}
